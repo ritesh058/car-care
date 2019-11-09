@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const path = require ('path');
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
@@ -15,7 +16,7 @@ mongoose.connect("mongodb+srv://ritesh058:ritesh058@mflix-dkogv.mongodb.net/car-
     else{
         console.log("Connected to Database")
     }
-});
+}); 
 
 const userRoutes  = require('./routes/user.js');
 
@@ -34,6 +35,12 @@ app.use((req, res, next)=> {
 });
 
 app.use(userRoutes);
+
+app.use(express.static(path.join(__dirname,'public')));
+
+app.use('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,"public/index.html"))
+})
 
 app.listen(port, () => {
     console.log(`Server Running on ${port}`)
