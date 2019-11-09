@@ -42,6 +42,7 @@ app.use('*',(req,res)=>{
     res.sendFile(path.join(__dirname,"public/index.html"))
 })
 
+//startign server
 app.listen(port, () => {
     console.log(`Server Running on ${port}`)
 })
